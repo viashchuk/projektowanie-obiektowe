@@ -1,14 +1,10 @@
 program RandomGenerator;
 
-const
-  array_size = 50;
-  min = 0;
-  max = 100; 
-
 type
-    numbers = array[1..array_size] of Integer; 
+    IntArray = array of Integer; 
 var
-    random_numbers: numbers;
+    random_numbers: IntArray;
+    array_size, min, max: Integer;
     j: integer;
 
 procedure GenerateRandomNumbers;
@@ -18,7 +14,7 @@ var
 begin
     randomize;
 
-    for i := 1 to array_size do begin
+    for i := 0 to array_size - 1 do begin
         x := random(max-min+1) + min;
         random_numbers[i] := x
     end;
@@ -26,46 +22,83 @@ end;
 
 
 procedure QuickSort(l, r: Integer);
-var 
-  newL, newR: Integer;
-  temp, pivot: Integer;
+var
+  newL, newR, pivot, temp: Integer;
 begin
   newL := l;
   newR := r;
-  
   pivot := random_numbers[(l + r) div 2];
   
   repeat
-    while random_numbers[newL] < pivot do
-      newL := newL + 1;
-
-    while random_numbers[newR] > pivot do
-      newR := newR - 1;
-
+    while random_numbers[newL] < pivot do Inc(newL);
+    while random_numbers[newR] > pivot do Dec(newR);
+    
     if newL <= newR then
     begin
-      { Исправление обмена элементов }
       temp := random_numbers[newL];
       random_numbers[newL] := random_numbers[newR];
       random_numbers[newR] := temp;
-
-      newL := newL + 1;
-      newR := newR - 1;
+      Inc(newL);
+      Dec(newR);
     end;
   until newL > newR;
-
-  if l < newR then
-    QuickSort(l, newR);
-
-  if newL < r then
-    QuickSort(newL, r);
+  
+  if l < newR then QuickSort(l, newR);
+  if newL < r then QuickSort(newL, r);
 end;
 
+function GetArraySize(): Integer;
+var
+  value: Integer;
+begin
+  repeat
+    Write('Enter the number of numbers to generate: ');
+    ReadLn(value);
+    
+    if value <= 0 then
+      WriteLn('Error: the number must be positive');
+    until value > 0;
+  
+  GetArraySize := value;
+end;
+
+function GetMinValue(): Integer;
+var
+  value: Integer;
+begin
+  Write('Enter the minimum random value (from): ');
+  ReadLn(value);
+  GetMinValue := value;
+end;
+
+function GetMaxValue(min: Integer): Integer;
+var
+  value: Integer;
+begin
+  repeat
+    Write('Enter the maximum value of the random (to): ');
+    ReadLn(value);
+    
+    if value <= min then
+      WriteLn('Error: maximum value must be greater than minimum ');
+    until value > min;
+  
+  GetMaxValue := value;
+end;
 
 begin
-    GenerateRandomNumbers;
-    QuickSort(1, array_size);
+  array_size := GetArraySize();
+  min := GetMinValue();
+  max := GetMaxValue(min);
 
-    for j:= 1 to array_size do
-        write(random_numbers[j], ' ');
+  WriteLn(min);
+  WriteLn(max);
+  
+  SetLength(random_numbers, array_size);
+
+  GenerateRandomNumbers;
+  QuickSort(0, array_size-1);
+  
+  for j:= 0 to array_size-1 do
+    write(random_numbers[j], ' ');
 end.
