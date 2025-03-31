@@ -2,7 +2,7 @@
 
 **Zadanie 1** Pascal
 
-:white_check_mark: 3.0 wymaganie 1 [Link do commita 1]()
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/792401c835bc674bc7cea21a0d3c29876949b5fc)
 
 :white_check_mark: 3.5 wymaganie 2 [Link do commita 2]()
 
