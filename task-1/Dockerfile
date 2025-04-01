@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y wget vim git curl
 
 RUN apt-get install -y build-essential unzip
 
-RUN apt-get install -y fp-compiler
+RUN apt-get install -y fp-compiler fp-units-fcl
 
 RUN useradd -ms /bin/bash student 
 RUN adduser student sudo

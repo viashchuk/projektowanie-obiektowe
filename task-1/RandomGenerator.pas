@@ -1,5 +1,8 @@
 program RandomGenerator;
 
+uses 
+  RandomUtils;
+
 type
     IntArray = array of Integer; 
 var
@@ -7,45 +10,6 @@ var
     array_size, min, max: Integer;
     j: integer;
 
-procedure GenerateRandomNumbers;
-var 
-    x, i: integer;
-
-begin
-    randomize;
-
-    for i := 0 to array_size - 1 do begin
-        x := random(max-min+1) + min;
-        random_numbers[i] := x
-    end;
-end;
-
-
-procedure QuickSort(l, r: Integer);
-var
-  newL, newR, pivot, temp: Integer;
-begin
-  newL := l;
-  newR := r;
-  pivot := random_numbers[(l + r) div 2];
-  
-  repeat
-    while random_numbers[newL] < pivot do Inc(newL);
-    while random_numbers[newR] > pivot do Dec(newR);
-    
-    if newL <= newR then
-    begin
-      temp := random_numbers[newL];
-      random_numbers[newL] := random_numbers[newR];
-      random_numbers[newR] := temp;
-      Inc(newL);
-      Dec(newR);
-    end;
-  until newL > newR;
-  
-  if l < newR then QuickSort(l, newR);
-  if newL < r then QuickSort(newL, r);
-end;
 
 function GetArraySize(): Integer;
 var
@@ -96,9 +60,9 @@ begin
   
   SetLength(random_numbers, array_size);
 
-  GenerateRandomNumbers;
-  QuickSort(0, array_size-1);
-  
-  for j:= 0 to array_size-1 do
-    write(random_numbers[j], ' ');
+  GenerateRandomNumbers(random_numbers, array_size, min, max);
+  PrintArray(random_numbers, 'Generated numbers:');
+
+  QuickSort(random_numbers, 0, array_size - 1);
+  PrintArray(random_numbers, 'Sorted numbers:');
 end.
