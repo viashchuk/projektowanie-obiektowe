@@ -8,7 +8,7 @@
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/viashchuk/projektowanie-obiektowe/commit/032264f538d75a9c131166d9418f4c001d39a1f1)
 
-:white_check_mark: 4.5 wymaganie 4 [Link do commita 4]()
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/3f76ed75be7b1542c29550c7c0f7aab10a7ab2a2)
 
 :white_check_mark: 5.0 wymaganie 5 [Link do commita 5]()
 
