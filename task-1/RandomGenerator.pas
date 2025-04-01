@@ -3,13 +3,9 @@ program RandomGenerator;
 uses 
   RandomUtils;
 
-type
-    IntArray = array of Integer; 
 var
     random_numbers: IntArray;
     array_size, min, max: Integer;
-    j: integer;
-
 
 function GetArraySize(): Integer;
 var
@@ -54,9 +50,6 @@ begin
   array_size := GetArraySize();
   min := GetMinValue();
   max := GetMaxValue(min);
-
-  WriteLn(min);
-  WriteLn(max);
   
   SetLength(random_numbers, array_size);
 
