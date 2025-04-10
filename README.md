@@ -27,7 +27,7 @@ Kod: [Pascal](./task-1)
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/729508124ee526dc4e63e4248f0417922baef6f3)
 
-:x: 5.0 wymaganie 5 [Link do commita 5]()
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/viashchuk/projektowanie-obiektowe/commit/b76ef5b6b4cf6a897884bf42494dc31e4c70d5fc)
 
 
 Kod: [Symfony](./task-2)
