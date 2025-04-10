@@ -21,7 +21,7 @@ Kod: [Pascal](./task-1)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/93d911f54f6687bcd4e615de7278eda10e64715f)
 
-:x: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/0f290b3a50042f9c0b21b133f451bcc8dce619b2)
 
 :x: 4.0 wymaganie 3 [Link do commita 3]()
 
