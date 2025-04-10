@@ -4,7 +4,7 @@ readonly RED='\033[0;31m'
 readonly GREEN='\033[0;32m'
 readonly BLUE='\033[0;34m'
 readonly NO_COLOR='\033[0m'
-readonly BASE_URL="http://localhost:8000"
+readonly BASE_URL="http://localhost:8000/api"
 
 print_separator() {
     printf "${BLUE}=%.0s" {1..100}

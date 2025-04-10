@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/product')]
+#[Route('/api/product')]
 final class ProductController extends AbstractController
 {
     public function __construct(
@@ -20,19 +20,23 @@ final class ProductController extends AbstractController
         private ProductRepository $productRepository
     ) {}
 
-    #[Route(name: 'app_product_index', methods: ['GET'])]
+    #[Route(name: 'api_product_index', methods: ['GET'])]
     public function index(): JsonResponse
     {
-        return $this->json($this->productRepository->findAll());
+        return $this->json($this->productRepository->findAll(), 200, [], [
+            'groups' => ['product:read']
+        ]);
     }
 
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'api_product_show', methods: ['GET'])]
     public function show(Product $product): JsonResponse
     {
-        return $this->json($product);
+        return $this->json($product, 200, [], [
+            'groups' => ['product:read']
+        ]);
     }
 
-    #[Route(name: 'app_product_create', methods: ['POST'])]
+    #[Route(name: 'api_product_create', methods: ['POST'])]
     public function create(#[MapRequestPayload()] ProductDto $productDto): JsonResponse
     {
         $product = $this->productService->create($productDto);
@@ -40,15 +44,17 @@ final class ProductController extends AbstractController
         return $this->json($product, Response::HTTP_CREATED);
     }
 
-    #[Route('/{id}', name: 'app_product_update', methods: ['PUT'])]
+    #[Route('/{id}', name: 'api_product_update', methods: ['PUT'])]
     public function update(#[MapRequestPayload()] ProductDto $productDto, Product $product): JsonResponse
     {
         $updatedProduct = $this->productService->update($product, $productDto);
 
-        return $this->json($updatedProduct);
+        return $this->json($updatedProduct, 200, [], [
+            'groups' => ['product:read']
+        ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['DELETE'])]
+    #[Route('/{id}', name: 'api_product_delete', methods: ['DELETE'])]
     public function delete(Product $product): JsonResponse
     {
         $this->productService->delete($product);
