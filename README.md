@@ -36,7 +36,7 @@ Kod: [Symfony](./task-2)
 
 **Zadanie 2** Spring Boot - Kotlin
 
-:x: 3.0 wymaganie 1 [Link do commita 1]()
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/273b018dfdb3a0023bd758cea7f27bdbb1c1619a)
 
 :x: 3.5 wymaganie 2 [Link do commita 2]()
 
