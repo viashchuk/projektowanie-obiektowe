@@ -8,14 +8,16 @@ import org.springframework.http.ResponseEntity
 
 import app.entities.Product
 import app.services.ProductService
-import app.services.auth.AuthServiceEager
+// import app.services.auth.AuthServiceEager
+import app.services.auth.AuthServiceLazy
 
 @RestController
 @RequestMapping("/products")
 class ProductController(private val productService: ProductService) {
 
     @Autowired
-    private lateinit var authService: AuthServiceEager
+    // private lateinit var authService: AuthServiceEager
+    private lateinit var authService: AuthServiceLazy
 
     @GetMapping
     fun getAll(): ResponseEntity<Any> {

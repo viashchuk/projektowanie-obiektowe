@@ -6,13 +6,15 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.beans.factory.annotation.Autowired
 
 import app.dto.AuthRequest
-import app.services.auth.AuthServiceEager
+// import app.services.auth.AuthServiceEager
+import app.services.auth.AuthServiceLazy
 
 @RestController
 class AuthController() {
 
     @Autowired
-    private lateinit var authService: AuthServiceEager
+    // private lateinit var authService: AuthServiceEager
+    private lateinit var authService: AuthServiceLazy
 
     @PostMapping("/")
     fun login(@RequestBody request: AuthRequest): ResponseEntity<String> {
