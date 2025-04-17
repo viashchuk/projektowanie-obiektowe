@@ -9,7 +9,10 @@ import app.dto.AuthRequest
 import app.services.auth.AuthServiceEager
 
 @RestController
-class AuthController(private val authService: AuthServiceEager) {
+class AuthController() {
+
+    @Autowired
+    private lateinit var authService: AuthServiceEager
 
     @PostMapping("/")
     fun login(@RequestBody request: AuthRequest): ResponseEntity<String> {
