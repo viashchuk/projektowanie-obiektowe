@@ -44,7 +44,7 @@ Kod: [Symfony](./task-2)
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/bce40a2b39ebe0ea95cea8cbe5ee94a390b0fc1b)
 
-:x: 5.0 wymaganie 5 [Link do commita 5]()
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/viashchuk/projektowanie-obiektowe/commit/7ed6715fde72c4e018f4b234ca1b50fcec0b2542)
 
 
 Kod: [Spring Boot - Kotlin](./task-3)
