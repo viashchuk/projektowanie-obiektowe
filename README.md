@@ -38,11 +38,11 @@ Kod: [Symfony](./task-2)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/273b018dfdb3a0023bd758cea7f27bdbb1c1619a)
 
-:x: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/9e3962e724c2d90b787300cb5681dbd8c1635a2d)
 
-:x: 4.0 wymaganie 3 [Link do commita 3]()
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/viashchuk/projektowanie-obiektowe/commit/7a68f47fc651ce1eef724c33081a472bb82ac724)
 
-:x: 4.5 wymaganie 4 [Link do commita 4]()
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/bce40a2b39ebe0ea95cea8cbe5ee94a390b0fc1b)
 
 :x: 5.0 wymaganie 5 [Link do commita 5]()
 
