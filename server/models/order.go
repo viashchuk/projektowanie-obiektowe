@@ -6,13 +6,12 @@ import (
 
 type Order struct {
 	gorm.Model
-    ID        int       `json:"id"`
-	OrderItems []OrderItem `json:"items" gorm:"foreignKey:OrderID"`
+	OrderItems        []OrderItem `json:"items" gorm:"foreignKey:OrderID"`
     CustomerFirstName string `json:"firstName"`
     CustonerLastName  string `json:"lastName"`
-    CustomerEmail  string `json:"email"`
-    CardNumber     string `json:"cardNumber"`
-    ExpiryMonth    string `json:"expiryMonth"`
-    ExpiryYear     string `json:"expiryYear"`
-    CVC            string `json:"cvc"`
+    CustomerEmail     string `json:"email"`
+    CardNumber        string `json:"cardNumber"`
+    ExpiryMonth       string `json:"expiryMonth"`
+    ExpiryYear        string `json:"expiryYear"`
+    CVC               string `json:"cvc"`
 }
