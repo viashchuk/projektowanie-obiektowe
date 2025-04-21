@@ -7,7 +7,7 @@ import (
 type Order struct {
 	gorm.Model
     ID        int       `json:"id"`
-	Items []Product `gorm:"many2many:order_items;" json:"items"`
+	OrderItems []OrderItem `json:"items" gorm:"foreignKey:OrderID"`
     CustomerFirstName string `json:"firstName"`
     CustonerLastName  string `json:"lastName"`
     CustomerEmail  string `json:"email"`
