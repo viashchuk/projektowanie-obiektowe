@@ -1,0 +1,22 @@
+services:
+  client:
+    image: node:22-alpine
+    working_dir: /client-app
+    command: sh -c "npm ci && npm run dev -- --host"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/client-app
+    networks:
+      - app
+  backend:
+    build: ./server
+    ports:
+      - "1323:1323"
+    volumes:
+      - ./server:/go-app
+    networks:
+      - app
+
+networks:
+  app:
