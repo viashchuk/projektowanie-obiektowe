@@ -5,11 +5,14 @@ import (
 	"task-4/db"
 	"task-4/routes"
 	"task-4/seeds"
+	"task-4/config"
 
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	config.LoadConfig()
+	
 	db := db.InitDB()
 
 	s := seeds.Seed{DB: db}
