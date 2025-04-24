@@ -2,6 +2,7 @@ package main
 
 import (
 	"task-4/controllers"
+	"task-4/repositories"
 	"task-4/db"
 	"task-4/routes"
 	"task-4/seeds"
@@ -12,7 +13,7 @@ import (
 
 func main() {
 	config.LoadConfig()
-	
+
 	db := db.InitDB()
 
 	s := seeds.Seed{DB: db}
@@ -20,7 +21,8 @@ func main() {
 
 	e := echo.New()
 
-	c := controllers.NewController()
+	repo := &repositories.Repository{DB: db}
+	c := controllers.NewController(repo)
 
 	routes.SetupRoutes(e, c)
 

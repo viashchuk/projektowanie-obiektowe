@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 
 	"task-4/config"
+	"task-4/repositories"
 )
 
 type WeatherSummary struct {
@@ -14,7 +15,7 @@ type WeatherSummary struct {
 	Temperature float64 `json:"temperature"`
 }
 
-func GetCityWeather(city string) (*WeatherSummary, error) {
+func GetCityWeather(city string, repo *repositories.Repository) (*WeatherSummary, error) {
 	apiKey := config.GetOpenWeatherApiKey()
 	baseURL := config.GetOpenWeatherBaseUrl()
 
@@ -41,8 +42,12 @@ func GetCityWeather(city string) (*WeatherSummary, error) {
 		return nil, fmt.Errorf("failed to parse JSON: %w", err)
 	}
 
+	temp := result["main"].(map[string]interface{})["temp"].(float64)
+
+	_ = repo.SaveWeather(city, temp)
+
 	return &WeatherSummary{
-		City:        result["name"].(string),
-		Temperature: result["main"].(map[string]interface{})["temp"].(float64),
+		City:        city,
+		Temperature: temp,
 	}, nil
 }
