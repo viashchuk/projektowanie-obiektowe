@@ -2,12 +2,18 @@ package main
 
 import (
 	"task-4/controllers"
+	"task-4/db"
 	"task-4/routes"
+	"task-4/seeds"
 
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	db := db.InitDB()
+
+	s := seeds.Seed{DB: db}
+	s.SeedWeather()
 
 	e := echo.New()
 
