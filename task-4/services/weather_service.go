@@ -42,6 +42,10 @@ func GetCityWeather(city string, repo *repositories.Repository) (*WeatherSummary
 		return nil, fmt.Errorf("failed to parse JSON: %w", err)
 	}
 
+	if result["main"]== nil {
+		return nil, fmt.Errorf("'main' not found")
+	}
+	
 	temp := result["main"].(map[string]interface{})["temp"].(float64)
 
 	_ = repo.SaveWeather(city, temp)
