@@ -53,15 +53,15 @@ Kod: [Spring Boot - Kotlin](./task-3)
 
 **Zadanie 4** Echo - Go
 
-:x: 3.0 wymaganie 1 [Link do commita 1]()
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/3c6077adabbc88b2d06a370e9e147d14617707fa)
 
-:x: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/67ac378c5a928c07c1d91f4d3ce42abb512f5fe1)
 
-:x: 4.0 wymaganie 3 [Link do commita 3]()
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/viashchuk/projektowanie-obiektowe/commit/29c2d8ae0556b89764ed8720e5cf1b08a7f89476)
 
-:x: 4.5 wymaganie 4 [Link do commita 4]()
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/e1962773feae5f591ff70d327f566d54a5141faf)
 
-:x: 5.0 wymaganie 5 [Link do commita 5]()
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/viashchuk/projektowanie-obiektowe/commit/525f6a85360ef447bab88d1c5f6a9b32a77db606)
 
 
 Kod: [Echo - Go](./task-4)
