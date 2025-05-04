@@ -2,11 +2,13 @@ services:
   client:
     image: node:22-alpine
     working_dir: /client-app
-    command: sh -c "npm ci && npm run dev -- --host"
+    command: sh -c "npm i && npm run dev -- --host"
     ports:
       - "5173:5173"
     volumes:
       - ./client:/client-app
+    env_file:
+      - ./client/.env
     networks:
       - app
   backend:
