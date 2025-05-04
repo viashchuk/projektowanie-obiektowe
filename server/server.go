@@ -24,6 +24,8 @@ func main() {
         AllowMethods: []string{echo.GET, echo.POST},
     }))
 
+	e.Static("/uploads", "uploads")
+
 	repo := &repositories.Repository{DB: db}
 	c := controllers.NewController(repo)
 
