@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"fmt"
 	"server/models"
 )
 
@@ -11,19 +10,9 @@ func (r *Repository) GetOrders() ([]models.Order, error) {
 	return orders, err
 }
 
-func (r *Repository) GetOrderByID(id int) (*models.Order, error) {
-	var order models.Order
-
-	if err := r.DB.Preload("OrderItems.Product").First(&order, id).Error; err != nil {
-		return nil, fmt.Errorf("order not found")
-	}
-
-	return &order, nil
-}
-
 func (r *Repository) CreateOrder(o models.Order) (*models.Order, error) {
 	for i := range o.OrderItems {
-		o.OrderItems[i].OrderID = uint(o.ID)
+		o.OrderItems[i].OrderID = o.ID
 	}
 
 	if err := r.DB.Create(&o).Error; err != nil {

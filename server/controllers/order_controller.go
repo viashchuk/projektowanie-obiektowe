@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -12,21 +13,14 @@ import (
 func (c *Controller) GetOrders(ctx echo.Context) error {
 	orders, err := c.repo.GetOrders()
 	if err != nil {
-		return ctx.JSON(http.StatusNotFound, echo.Map{"error": err.Error()})
+		return ctx.JSON(http.StatusInternalServerError, echo.Map{"error": err.Error()})
+	}
+
+	if len(orders) == 0 {
+		return ctx.NoContent(http.StatusNoContent)
 	}
 
 	return ctx.JSON(http.StatusOK, orders)
-}
-
-func (c *Controller) GetOrder(ctx echo.Context) error {
-	id, _ := utils.ParseID(ctx)
-	order, err := c.repo.GetOrderByID(id)
-
-	if err != nil {
-		return utils.ErrorResponse(ctx, http.StatusBadRequest, err)
-	}
-
-	return ctx.JSON(http.StatusOK, order)
 }
 
 func (c *Controller) CreateOrder(ctx echo.Context) error {
@@ -34,6 +28,10 @@ func (c *Controller) CreateOrder(ctx echo.Context) error {
 
 	if err := ctx.Bind(&order); err != nil {
 		return utils.ErrorResponse(ctx, http.StatusBadRequest, err)
+	}
+
+	if len(order.OrderItems) == 0 {
+		return utils.ErrorResponse(ctx, http.StatusBadRequest, errors.New("order must contain at least one item"))
 	}
 
 	newOrder, err := c.repo.CreateOrder(order)
