@@ -7,11 +7,11 @@ import (
 type Order struct {
 	gorm.Model
 	OrderItems        []OrderItem `json:"items" gorm:"foreignKey:OrderID"`
-    CustomerFirstName string `json:"firstName"`
-    CustomerLastName  string `json:"lastName"`
-    CustomerEmail     string `json:"email"`
-    CardNumber        string `json:"cardNumber"`
-    ExpiryMonth       string `json:"expiryMonth"`
-    ExpiryYear        string `json:"expiryYear"`
-    CVC               string `json:"cvc"`
+    CustomerFirstName string `json:"customerFirstName"`
+    CustomerLastName  string `json:"customerLastName"`
+    CustomerEmail     string `json:"customerEmail"`
+    CardNumber        string `json:"-"`
+    ExpiryMonth       string `json:"-"`
+    ExpiryYear        string `json:"-"`
+    CVC               string `json:"-"`
 }
