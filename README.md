@@ -1,5 +1,5 @@
 
-# Task - 3: React - Frontend
+# Task - 5: React - Frontend
 
 - 3.0 As part of the project, two components must be created: Products and Payments; Payments should send data to the server application, and in Products we should retrieve data about products from the server application: [Commit](https://github.com/viashchuk/ebiznes/commit/7e85e42188b0cf04757d3cd22eb9743543d5bb0d)
 - 3.5 A Cart with a view should be added; routing should be used: [Commit](https://github.com/viashchuk/ebiznes/commit/697bbbe455d87bda70355064c25d5839bc3660b0)
