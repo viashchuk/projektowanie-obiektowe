@@ -3,17 +3,12 @@ package controllers
 import (
 	"net/http"
 	"net/http/httptest"
-	"server/controllers"
 	"server/repositories"
 	"testing"
 
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
-
-func setupEcho() *echo.Echo {
-	return echo.New()
-}
 
 func TestGetProducts_Success(t *testing.T) {
 	e := echo.New()
@@ -22,7 +17,7 @@ func TestGetProducts_Success(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	MockRepository := &repositories.MockRepository{}
-	ctrl := controllers.NewController(MockRepository)
+	ctrl := NewController(MockRepository)
 
 	err := ctrl.GetProducts(ctx)
 
@@ -38,7 +33,7 @@ func TestGetProducts_EmptyList(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepositoryWithEmptyLists{}
-	ctrl := controllers.NewController(mockRepository)
+	ctrl := NewController(mockRepository)
 
 	err := ctrl.GetProducts(ctx)
 

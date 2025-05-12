@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"server/controllers"
 	"server/models"
 	"server/repositories"
 	"testing"
@@ -14,18 +13,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func setupEcho() *echo.Echo {
-	return echo.New()
-}
-
 func TestGetOrders_Success(t *testing.T) {
-	e := setupEcho()
+	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/orders", nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := controllers.NewController(mockRepository)
+	ctrl := NewController(mockRepository)
 
 	err := ctrl.GetOrders(ctx)
 
@@ -40,7 +35,7 @@ func TestGetOrders_EmptyList(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepositoryWithEmptyLists{}
-	ctrl := controllers.NewController(mockRepository)
+	ctrl := NewController(mockRepository)
 
 	err := ctrl.GetOrders(ctx)
 
@@ -49,7 +44,7 @@ func TestGetOrders_EmptyList(t *testing.T) {
 }
 
 func TestCreateOrder_Success(t *testing.T) {
-	e := setupEcho()
+	e := echo.New()
 
 	order := models.Order{
 		CustomerFirstName: "Anna",
@@ -71,7 +66,7 @@ func TestCreateOrder_Success(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := controllers.NewController(mockRepository)
+	ctrl := NewController(mockRepository)
 
 	err := ctrl.CreateOrder(ctx)
 
@@ -80,7 +75,7 @@ func TestCreateOrder_Success(t *testing.T) {
 }
 
 func TestCreateOrder_InvalidData(t *testing.T) {
-	e := setupEcho()
+	e := echo.New()
 
 	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewBufferString("invalid-json"))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
@@ -88,7 +83,7 @@ func TestCreateOrder_InvalidData(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := controllers.NewController(mockRepository)
+	ctrl := NewController(mockRepository)
 
 	err := ctrl.CreateOrder(ctx)
 
@@ -97,7 +92,7 @@ func TestCreateOrder_InvalidData(t *testing.T) {
 }
 
 func TestCreateOrder_EmptyItems(t *testing.T) {
-	e := setupEcho()
+	e := echo.New()
 
 	body := `{
 		"firstName": "Anna",
@@ -116,7 +111,7 @@ func TestCreateOrder_EmptyItems(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := controllers.NewController(mockRepository)
+	ctrl := NewController(mockRepository)
 
 	err := ctrl.CreateOrder(ctx)
 
