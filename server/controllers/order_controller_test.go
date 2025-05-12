@@ -12,10 +12,11 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
+const ordersPath = "/orders"
 
-func TestGetOrders_Success(t *testing.T) {
+func TestGetOrdersSuccess(t *testing.T) {
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, "/orders", nil)
+	req := httptest.NewRequest(http.MethodGet, ordersPath, nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
@@ -28,9 +29,9 @@ func TestGetOrders_Success(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
-func TestGetOrders_EmptyList(t *testing.T) {
+func TestGetOrdersEmptyList(t *testing.T) {
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, "/orders", nil)
+	req := httptest.NewRequest(http.MethodGet, ordersPath, nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
@@ -43,7 +44,7 @@ func TestGetOrders_EmptyList(t *testing.T) {
 	assert.Equal(t, http.StatusNoContent, rec.Code)
 }
 
-func TestCreateOrder_Success(t *testing.T) {
+func TestCreateOrderSuccess(t *testing.T) {
 	e := echo.New()
 
 	order := models.Order{
@@ -60,7 +61,7 @@ func TestCreateOrder_Success(t *testing.T) {
 	}
 
 	body, _ := json.Marshal(order)
-	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewReader(body))
+	req := httptest.NewRequest(http.MethodPost, ordersPath, bytes.NewReader(body))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
@@ -74,10 +75,10 @@ func TestCreateOrder_Success(t *testing.T) {
 	assert.Equal(t, http.StatusCreated, rec.Code)
 }
 
-func TestCreateOrder_InvalidData(t *testing.T) {
+func TestCreateOrderInvalidData(t *testing.T) {
 	e := echo.New()
 
-	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewBufferString("invalid-json"))
+	req := httptest.NewRequest(http.MethodPost, ordersPath, bytes.NewBufferString("invalid-json"))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
@@ -91,7 +92,7 @@ func TestCreateOrder_InvalidData(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, rec.Code)
 }
 
-func TestCreateOrder_EmptyItems(t *testing.T) {
+func TestCreateOrderEmptyItems(t *testing.T) {
 	e := echo.New()
 
 	body := `{
@@ -105,7 +106,7 @@ func TestCreateOrder_EmptyItems(t *testing.T) {
 		"items": []
 	}`
 
-	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewBufferString(body))
+	req := httptest.NewRequest(http.MethodPost, ordersPath, bytes.NewBufferString(body))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)

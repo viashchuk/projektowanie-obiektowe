@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetProducts_Success(t *testing.T) {
+func TestGetOrdersSuccess(t *testing.T) {
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/products", nil)
 	rec := httptest.NewRecorder()
@@ -26,7 +26,7 @@ func TestGetProducts_Success(t *testing.T) {
 	assert.Contains(t, rec.Body.String(), "Kawa")
 }
 
-func TestGetProducts_EmptyList(t *testing.T) {
+func TestGetProductsEmptyList(t *testing.T) {
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/products", nil)
 	rec := httptest.NewRecorder()
