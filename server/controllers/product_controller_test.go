@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetOrdersSuccess(t *testing.T) {
+func TestGetProductsSuccess(t *testing.T) {
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/products", nil)
 	rec := httptest.NewRecorder()
