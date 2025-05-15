@@ -36,7 +36,7 @@ const Payment = ({ onOrderCreated }) => {
                 clearCart()
                 onOrderCreated(res.data)
             })
-            .catch(err => console.error(err));
+            .catch(err => console.log(err));
     };
 
     return (
