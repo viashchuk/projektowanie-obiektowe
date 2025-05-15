@@ -69,15 +69,15 @@ Kod: [Echo - Go](./task-4)
 
 **Zadanie 5** React
 
-:white_check_mark: 3.0 wymaganie 1 [Link do commita 1]()
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/9fae0d7b44e2ab9af8837fe05754d1d1a9c2dffd)
 
-:white_check_mark: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/dd246f1b5d5dcfc68d9b3090587e94eaf7b15215)
 
-:white_check_mark: 4.0 wymaganie 3 [Link do commita 3]()
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/viashchuk/projektowanie-obiektowe/commit/eb8f522566117d86956259b77dc657e2c9fde651)
 
-:white_check_mark: 4.5 wymaganie 4 [Link do commita 4]()
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/cad0a6bee45eba0cd6db2a75e47a62ae338cca92)
 
-:white_check_mark: 5.0 wymaganie 5 [Link do commita 5]()
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/viashchuk/projektowanie-obiektowe/commit/d1fa4b00ed1d8f38c802b1b5ccbc9fa2a4444a62)
 
 
 Kod: [React](./task-5)
