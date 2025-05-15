@@ -86,15 +86,15 @@ Kod: [React](./task-5)
 
 **Zadanie 6** Sonar (JS)
 
-:white_check_mark: 3.0 wymaganie 1 [Link do commita 1]()
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/06bac5d705b7f9b8efe8da943fe73018d0636cad)
 
-:white_check_mark: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/2ad50a92f0f25fe1e4b54fae95dbc24c65834a59)
 
-:white_check_mark: 4.0 wymaganie 3 [Link do commita 3]()
+:white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/viashchuk/projektowanie-obiektowe/commit/2ad50a92f0f25fe1e4b54fae95dbc24c65834a59)
 
-:white_check_mark: 4.5 wymaganie 4 [Link do commita 4]()
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/2ad50a92f0f25fe1e4b54fae95dbc24c65834a59)
 
-:white_check_mark: 5.0 wymaganie 5 [Link do commita 5]()
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/viashchuk/projektowanie-obiektowe/commit/2ad50a92f0f25fe1e4b54fae95dbc24c65834a59)
 
 
 Kod: [Sonar (JS)](./task-6)
