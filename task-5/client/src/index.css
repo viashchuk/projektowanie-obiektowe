@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  background-color: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+
+.form-input {
+  @apply border border-gray-300 bg-white rounded-2xl pl-4 pr-10 py-3.5 w-full shadow-xs leading-normal text-gray-900 focus:outline-none focus:border-[#fc6a32] focus:outline-4 focus:outline-[#fc6a32] focus:outline-offset-0;
+}
