@@ -105,13 +105,13 @@ Kod: [Sonar (JS)](./task-6)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/4b37ac39c44ecae1c79784d25f22fa5ae7829136)
 
-<!-- :white_check_mark: 3.5 wymaganie 2 [Link do commita 2]()
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/8eedb3066083013c6cad76329045d89fa30f486f)
 
-:white_check_mark: 4.0 wymaganie 3 [Link do commita 3]()
+<!-- :white_check_mark: 4.0 wymaganie 3 [Link do commita 3]() -->
 
-:white_check_mark: 4.5 wymaganie 4 [Link do commita 4]()
+<!-- :white_check_mark: 4.5 wymaganie 4 [Link do commita 4]() -->
 
-:white_check_mark: 5.0 wymaganie 5 [Link do commita 5]() -->
+<!-- :white_check_mark: 5.0 wymaganie 5 [Link do commita 5]() -->
 
 
 Kod: [Vapor (Swift)](./task-7)
