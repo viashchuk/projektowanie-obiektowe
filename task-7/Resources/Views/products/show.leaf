@@ -1,0 +1,12 @@
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <h1>Product</h1>
+</div>
+
+<dl style="display: flex">
+  <dt style="font-weight: 600;">Name</dt>
+  <dd>#(product.title)</dd>
+</dl>
+<dl style="display: flex">
+  <dt style="font-weight: 600;">Price</dt>
+  <dd>#(product.price)</dd>
+</dl>

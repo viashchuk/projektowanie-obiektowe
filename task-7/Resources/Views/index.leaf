@@ -1,0 +1,22 @@
+#set("title"): CRUD App #endset
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>#embed("title")</title>
+</head>
+<body>
+    <header>
+        <h1>CRUD App</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        #embed("body")
+    </main>
+</body>
+</html>

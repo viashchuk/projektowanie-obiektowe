@@ -1,0 +1,25 @@
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <h1>Products</h1>
+    <a href="/products/new">Add product</a>
+</div>
+
+<table style="width:100%; border: 1px solid #E5E7EB; padding: 0; border-collapse: collapse">
+    <tr>
+        <th style="text-align:left;padding: 10px 24px;background:#F5F6FA;border-bottom: 1px solid #E5E7EB">Name</th>
+        <th style="text-align:left;padding: 10px 24px;background:#F5F6FA;border-bottom: 1px solid #E5E7EB">Price</th>
+        <th style="text-align:left;padding: 10px 24px;background:#F5F6FA;border-bottom: 1px solid #E5E7EB">Actions</th>
+    </tr>
+    #for(product in products):
+        <tr>
+            <td style="text-align:left;padding: 14px 24px;border-bottom: 1px solid #E5E7EB">#(product.title)</td>
+            <td style="text-align:left;padding: 14px 24px;border-bottom: 1px solid #E5E7EB">#(product.price)</td>
+            <td style="text-align:left;padding: 14px 24px;border-bottom: 1px solid #E5E7EB">
+                <a href="/products/#(product.id)">Show</a>
+                <a href="/products/#(product.id)/edit">Edit</a>
+                <form action="/products/#(product.id)/delete" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    #endfor        
+</table>
