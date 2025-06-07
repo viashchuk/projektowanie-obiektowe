@@ -11,6 +11,7 @@ public func configure(_ app: Application) async throws {
 
     app.migrations.add(CreateProduct())
     app.migrations.add(CreateCategory())
+    try app.autoMigrate().wait()
 
     app.views.use(.leaf)
 
