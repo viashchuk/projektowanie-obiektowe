@@ -109,7 +109,7 @@ Kod: [Sonar (JS)](./task-6)
 
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3](https://github.com/viashchuk/projektowanie-obiektowe/commit/f4afdf788677d8d8bc1761858c94de09a9d4cc4d)
 
-<!-- :white_check_mark: 4.5 wymaganie 4 [Link do commita 4]() -->
+:white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/b5d30f9fbc09ff9d3de18741c74fce479a7d34b6)
 
 <!-- :white_check_mark: 5.0 wymaganie 5 [Link do commita 5]() -->
 
