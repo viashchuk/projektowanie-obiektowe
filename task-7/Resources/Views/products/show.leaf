@@ -12,5 +12,8 @@
 </dl>
 <dl style="display: flex">
   <dt style="font-weight: 600;">Category</dt>
-  <dd>#(product.category.title)</dd>
+  <dd>
+    #(product.category.title)
+    #(product.categoryTitle)
+  </dd>
 </dl>

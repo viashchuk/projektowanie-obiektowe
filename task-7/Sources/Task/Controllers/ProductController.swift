@@ -1,9 +1,17 @@
 import Fluent
 import Vapor
+import Redis
 
 struct ProductEditContext: Encodable {
     let product: Product
     let categories: [Category]
+}
+
+struct ProductCacheDTO: Codable {
+    let id: UUID
+    let title: String
+    let price: Double
+    let categoryTitle: String
 }
 
 struct ProductController: RouteCollection {
@@ -50,17 +58,43 @@ struct ProductController: RouteCollection {
             throw Abort(.badRequest)
         }
 
-        return Product.query(on: req.db)
-            .with(\.$category)
-            .filter(\.$id == id)
-            .first()
-            .flatMap { product in
-            guard let product = product else {
-                return req.eventLoop.future(error: Abort(.notFound))
+        let cacheKey = RedisKey("product:\(id)")
+
+        return req.redis.get(cacheKey, asJSON: ProductCacheDTO.self).flatMap { cached in
+
+            if let cached = cached {
+                let context: [String: ProductCacheDTO] = ["product": cached]
+                return req.view.render("products/show", context)
             }
 
-            let context = ["product": product]
-            return req.view.render("products/show", context)
+            return Product.query(on: req.db)
+                .with(\.$category)
+                .filter(\.$id == id)
+                .first()
+                .flatMap { product in
+                    guard let product = product else {
+                        return req.eventLoop.future(error: Abort(.notFound))
+                    }
+
+                    let cacheDTO = ProductCacheDTO(
+                        id: product.id!,
+                        title: product.title,
+                        price: product.price,
+                        categoryTitle: product.category.title
+                    )
+
+                    req.redis.set(cacheKey, toJSON: cacheDTO).whenComplete { result in
+                        switch result {
+                        case .success:
+                            expireTheKey(cacheKey, redis: req.redis)
+                        case .failure(let error):
+                            print("\(error)")
+                        }
+                    }
+
+                    let context = ["product": product]
+                    return req.view.render("products/show", context)
+                }
         }
     }
 
