@@ -1,0 +1,5 @@
+<h1>Edit Category</h1>
+<form action="/categories/#(category.id)/update" method="POST">
+    <label>Name: <input type="text" name="title" value="#(category.title)" /></label><br>
+    <button type="submit">Save</button>
+</form>

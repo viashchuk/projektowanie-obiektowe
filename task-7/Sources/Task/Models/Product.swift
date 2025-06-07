@@ -14,19 +14,24 @@ final class Product: Model, Content, @unchecked Sendable {
     @Field(key: "price")
     var price: Double
 
+    @Parent(key: "category_id")
+    var category: Category
+
     init() { }
 
-    init(id: UUID? = nil, title: String, price: Double) {
+    init(id: UUID? = nil, title: String, price: Double, categoryID: UUID) {
         self.id = id
         self.title = title
         self.price = price
+        self.$category.id = categoryID
     }
     
     func toDTO() -> ProductDTO {
         .init(
             id: self.id,
-            title: self.$title.value,
-            price: self.$price.value
+            title: self.title,
+            price: self.price,
+            category_id: self.$category.id
         )
     }
 }

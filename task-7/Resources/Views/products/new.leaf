@@ -5,6 +5,13 @@
 
     <label for="price">Price:</label>
     <input type="number" step="0.01" id="price" name="price"><br><br>
+    
+    <label for="category">Category:</label>
+    <select name="category_id" id="category">
+        #for(category in categories):
+            <option value="#(category.id)">#(category.title)</option>
+        #endfor
+    </select><br><br>
 
     <button type="submit">Create</button>
 </form>

@@ -1,6 +1,11 @@
 import Fluent
 import Vapor
 
+struct ProductEditContext: Encodable {
+    let product: Product
+    let categories: [Category]
+}
+
 struct ProductController: RouteCollection {
     func boot(routes: any RoutesBuilder) throws {
         let products = routes.grouped("products")
@@ -19,31 +24,37 @@ struct ProductController: RouteCollection {
 
     @Sendable
     func index(req: Request) throws -> EventLoopFuture<View> {
-        return Product.query(on: req.db).all().flatMap { products in
+        return Product.query(on: req.db).with(\.$category).all().flatMap { products in
             let context = ["products": products]
             return req.view.render("products/index", context)
         }
     }
 
     func new(req: Request) throws -> EventLoopFuture<View> {
-        return req.view.render("products/new")
-    }
-
-    func create(req: Request) throws -> EventLoopFuture<Response> {
-        let product = try req.content.decode(Product.self)
-        
-        return product.save(on: req.db).map {
-            req.redirect(to: "/products")
+        return Category.query(on: req.db).all().flatMap { categories in
+            let context = ["categories": categories]
+            return req.view.render("products/new", context)
         }
     }
-    
+
+    func create(req: Request) async throws -> Response {
+        let product = try req.content.decode(ProductDTO.self).toModel()
+        try await product.save(on: req.db)
+
+        return req.redirect(to: "/products")
+    }
+
     @Sendable
     func show(req: Request) throws -> EventLoopFuture<View> {
         guard let id = req.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
 
-        return Product.find(id, on: req.db).flatMap { product in
+        return Product.query(on: req.db)
+            .with(\.$category)
+            .filter(\.$id == id)
+            .first()
+            .flatMap { product in
             guard let product = product else {
                 return req.eventLoop.future(error: Abort(.notFound))
             }
@@ -59,54 +70,48 @@ struct ProductController: RouteCollection {
             throw Abort(.badRequest)
         }
 
-        return Product.find(id, on: req.db).flatMap { product in
+        
+        let categories = Category.query(on: req.db).all()
+        let product = Product.query(on: req.db).with(\.$category).filter(\.$id == id).first()
+
+        return product.and(categories).flatMap { product, categories in
             guard let product = product else {
                 return req.eventLoop.future(error: Abort(.notFound))
             }
 
-            let context = ["product": product]
+            let context = ProductEditContext(product: product, categories: categories)
             return req.view.render("products/edit", context)
         }
     }
 
-    func update(req: Request) throws -> EventLoopFuture<Response> {
+    func update(req: Request) async throws -> Response {
         guard let id = req.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
-
-        return Product.find(id, on: req.db).flatMap { product in
-            guard let product = product else {
-                return req.eventLoop.future(error: Abort(.notFound))
-            }
-
-            do {
-                let updatedProduct = try req.content.decode(Product.self)
-                product.title = updatedProduct.title
-                product.price = updatedProduct.price
-
-                return product.save(on: req.db).map {
-                    req.redirect(to: "/products/\(id)")
-                }
-            } catch {
-                return req.eventLoop.future(error: error)
-            }
+        guard let product = try await Product.find(id, on: req.db) else {
+            throw Abort(.notFound)
         }
+        
+        let productDto = try req.content.decode(ProductDTO.self)
+        product.title = productDto.title
+        product.price = productDto.price
+        product.$category.id = productDto.category_id
+
+        try await product.update(on: req.db)
+
+        return req.redirect(to: "/products/\(id)")
     }
 
     @Sendable
-    func delete(req: Request) throws -> EventLoopFuture<Response> {
+    func delete(req: Request) async throws -> Response {
         guard let id = req.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
-
-        return Product.find(id, on: req.db).flatMap { product in
-            guard let product = product else {
-                return req.eventLoop.future(error: Abort(.notFound))
-            }
-
-            return product.delete(on: req.db).map {
-                req.redirect(to: "/products")
-            }
+        guard let product = try await Product.find(id, on: req.db) else {
+            throw Abort(.notFound)
         }
+
+        try await product.delete(on: req.db)
+        return req.redirect(to: "/products")
     }
 }

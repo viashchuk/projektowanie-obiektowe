@@ -1,0 +1,23 @@
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <h1>Categories</h1>
+    <a href="/categories/new">Add category</a>
+</div>
+
+<table style="width:100%; border: 1px solid #E5E7EB; padding: 0; border-collapse: collapse">
+    <tr>
+        <th style="text-align:left;padding: 10px 24px;background:#F5F6FA;border-bottom: 1px solid #E5E7EB">Name</th>
+        <th style="text-align:left;padding: 10px 24px;background:#F5F6FA;border-bottom: 1px solid #E5E7EB">Actions</th>
+    </tr>
+    #for(category in categories):
+        <tr>
+            <td style="text-align:left;padding: 14px 24px;border-bottom: 1px solid #E5E7EB">#(category.title)</td>
+            <td style="text-align:left;padding: 14px 24px;border-bottom: 1px solid #E5E7EB">
+                <a href="/categories/#(category.id)">Show</a>
+                <a href="/categories/#(category.id)/edit">Edit</a>
+                <form action="/categories/#(category.id)/delete" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    #endfor        
+</table>

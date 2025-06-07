@@ -10,3 +10,7 @@
   <dt style="font-weight: 600;">Price</dt>
   <dd>#(product.price)</dd>
 </dl>
+<dl style="display: flex">
+  <dt style="font-weight: 600;">Category</dt>
+  <dd>#(product.category.title)</dd>
+</dl>

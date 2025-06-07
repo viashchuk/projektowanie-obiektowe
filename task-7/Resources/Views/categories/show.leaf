@@ -1,0 +1,8 @@
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <h1>Category</h1>
+</div>
+
+<dl style="display: flex">
+  <dt style="font-weight: 600;">Name</dt>
+  <dd>#(category.title)</dd>
+</dl>
