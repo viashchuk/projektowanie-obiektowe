@@ -1,9 +1,11 @@
 
 import PropTypes from 'prop-types'
+import { Link } from "react-router-dom"
 
 const OrderConfirmation = ({ order }) => {
     return (
         <div className="p-6 bg-green-100 rounded-xl">
+            <Link to="/" className="font-semibold text-[#fc6a32] text-2xl">Wróć do sklepu</Link>
             <h2 className="text-xl font-semibold mb-4">Zamówienie złożone!</h2>
             <p><strong>Numer zamówienia:</strong> {order.ID}</p>
             <p><strong>Imię:</strong> {order.customerFirstName} {order.customerLastName}</p>
