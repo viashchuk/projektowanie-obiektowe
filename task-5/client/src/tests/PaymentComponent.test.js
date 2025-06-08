@@ -10,12 +10,14 @@ jest.mock('../hooks/useCart', () => ({
 
 describe('Payment', () => {
     it('renders form inputs', () => {
+        const onOrderCreatedMock = jest.fn()
+
         useCart.mockReturnValue({
             cartItems: [],
-            clearCart: jest.fn()
+            clearCart: jest.fn(),
         })
 
-        render(<Payment />)
+        render(<Payment onOrderCreated={onOrderCreatedMock} />)
 
         expect(screen.getByPlaceholderText('Imię')).toBeInTheDocument()
         expect(screen.getByPlaceholderText('Nazwisko')).toBeInTheDocument()
@@ -29,6 +31,7 @@ describe('Payment', () => {
 
     it('fills all fileds and submits form', async () => {
         const clearCartMock = jest.fn()
+        const onOrderCreatedMock = jest.fn()
 
         useCart.mockReturnValue({
             cartItems: [{ ID: 1, title: 'Kawa', quantity: 2, price: 10 }],
@@ -37,7 +40,7 @@ describe('Payment', () => {
 
         axios.post.mockResolvedValue({ status: 200 })
 
-        render(<Payment />)
+        render(<Payment onOrderCreated={onOrderCreatedMock} />)
 
         fireEvent.change(screen.getByPlaceholderText('Imię'), {
             target: { name: 'customerFirstName', value: 'Anna' }
@@ -95,23 +98,122 @@ describe('Payment', () => {
 
     it('submits order', async () => {
         const clearCartMock = jest.fn()
+        const onOrderCreatedMock = jest.fn()
+
         useCart.mockReturnValue({
             cartItems: [{ ID: 1, quantity: 1 }],
             clearCart: clearCartMock
         })
 
-        axios.post.mockResolvedValue({ status: 200 })
+        axios.post.mockResolvedValue({ status: 200, data: { ID: 123 } })
 
-        render(<Payment />)
+        render(<Payment onOrderCreated={onOrderCreatedMock} />)
 
         fireEvent.change(screen.getByPlaceholderText('Imię'), {
             target: { name: 'customerFirstName', value: 'Jakub' }
         })
 
+        fireEvent.change(screen.getByPlaceholderText('Nazwisko'), {
+            target: { name: 'customerLastName', value: 'Kowalski' }
+        })
+
+        fireEvent.change(screen.getByPlaceholderText('Email'), {
+            target: { name: 'customerEmail', value: 'jakub@example.com' }
+        })
+
+        fireEvent.change(screen.getByPlaceholderText('Numer karty'), {
+            target: { name: 'cardNumber', value: '4111111111111111' }
+        })
+
+        fireEvent.change(screen.getByPlaceholderText('Month (MM)'), {
+            target: { name: 'expiryMonth', value: '12' }
+        })
+
+        fireEvent.change(screen.getByPlaceholderText('Year (YY)'), {
+            target: { name: 'expiryYear', value: '25' }
+        })
+
+        fireEvent.change(screen.getByPlaceholderText('CVC'), {
+            target: { name: 'cvc', value: '123' }
+        })
+
         fireEvent.click(screen.getByText('Kupić'))
 
         await screen.findByText('Kupić')
+
         expect(axios.post).toHaveBeenCalled()
         expect(clearCartMock).toHaveBeenCalled()
+        expect(onOrderCreatedMock).toHaveBeenCalledWith({ ID: 123 })
     })
+
+    it('shows validation message when required fields are empty', () => {
+        const clearCartMock = jest.fn()
+        const onOrderCreatedMock = jest.fn()
+
+        useCart.mockReturnValue({
+            cartItems: [{ ID: 1, title: 'Kawa', quantity: 2, price: 10 }],
+            clearCart: clearCartMock
+        })
+
+        axios.post.mockResolvedValue({ status: 200 })
+
+        render(<Payment onOrderCreated={onOrderCreatedMock} />)
+
+        fireEvent.click(screen.getByText('Kupić'))
+
+        expect(clearCartMock).not.toHaveBeenCalled()
+        expect(onOrderCreatedMock).not.toHaveBeenCalled()
+
+        expect(screen.getByText(/Nie wypełniono pól:/)).toBeInTheDocument()
+
+        expect(screen.getByText('customerFirstName')).toBeInTheDocument()
+        expect(screen.getByText('customerLastName')).toBeInTheDocument()
+        expect(screen.getByText('customerEmail')).toBeInTheDocument()
+        expect(screen.getByText('cardNumber')).toBeInTheDocument()
+        expect(screen.getByText('expiryMonth')).toBeInTheDocument()
+        expect(screen.getByText('expiryYear')).toBeInTheDocument()
+        expect(screen.getByText('cvc')).toBeInTheDocument()
+
+        const firstNameInput = screen.getByPlaceholderText('Imię')
+        expect(firstNameInput.className).toMatch(/border-red-500/)
+
+        const lastNameInput = screen.getByPlaceholderText('Nazwisko')
+        expect(lastNameInput.className).toMatch(/border-red-500/)
+
+        const emailInput = screen.getByPlaceholderText('Email')
+        expect(emailInput.className).toMatch(/border-red-500/)
+
+        const cardNumberInput = screen.getByPlaceholderText('Numer karty')
+        expect(cardNumberInput.className).toMatch(/border-red-500/)
+
+        const expiryMonthInput = screen.getByPlaceholderText('Month (MM)')
+        expect(expiryMonthInput.className).toMatch(/border-red-500/)
+
+        const expiryYearInput = screen.getByPlaceholderText('Year (YY)')
+        expect(expiryYearInput.className).toMatch(/border-red-500/)
+
+        const cvcInput = screen.getByPlaceholderText('CVC')
+        expect(cvcInput.className).toMatch(/border-red-500/)
+    })
+
+
+    it('does not accept letters in number inputs', () => {
+        render(<Payment onOrderCreated={jest.fn()} />)
+
+        const cardNumberInput = screen.getByPlaceholderText('Numer karty')
+        const expiryMonthInput = screen.getByPlaceholderText('Month (MM)')
+        const expiryYearInput = screen.getByPlaceholderText('Year (YY)')
+        const cvcInput = screen.getByPlaceholderText('CVC')
+
+        fireEvent.change(cardNumberInput, { target: { value: 'abcd' } })
+        fireEvent.change(expiryMonthInput, { target: { value: 'mm' } })
+        fireEvent.change(expiryYearInput, { target: { value: 'yy' } })
+        fireEvent.change(cvcInput, { target: { value: 'xyz' } })
+
+        expect(cardNumberInput.value).toBe('')
+        expect(expiryMonthInput.value).toBe('')
+        expect(expiryYearInput.value).toBe('')
+        expect(cvcInput.value).toBe('')
+    })
+
 })

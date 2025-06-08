@@ -37,6 +37,8 @@ describe('Cart', () => {
 
         expect(screen.getByText('Koszyk jest pusty')).toBeInTheDocument()
         expect(screen.queryByText('Dane odbiorcy')).not.toBeInTheDocument()
+        expect(screen.queryByTestId('delete-item-from-cart')).not.toBeInTheDocument()
+        expect(screen.queryByText('Twój koszyk')).toBeInTheDocument()
     })
 
     it('calls removeFromCart when "Usunąć" button is clicked', () => {

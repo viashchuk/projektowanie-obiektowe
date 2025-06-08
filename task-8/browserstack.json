@@ -1,0 +1,26 @@
+{
+    "auth": {
+        "username": "${BROWSERSTACK_USERNAME}",
+        "access_key": "${BROWSERSTACK_ACCESS_KEY}"
+    },
+    "browsers": [
+        {
+            "browser": "chrome",
+            "os": "Windows 10",
+            "versions": [
+                "latest"
+            ]
+        }
+    ],
+    "run_settings": {
+        "project_name": "Python tests",
+        "build_name": "build-1"
+    },
+    "connection_settings": {
+        "local": false,
+        "local_identifier": null,
+        "local_mode": null,
+        "local_config_file": null
+    },
+    "disable_usage_reporting": false
+}
