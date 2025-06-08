@@ -1,0 +1,14 @@
+platforms:
+  - deviceName: iPhone 15 Pro Max
+    osVersion: 17
+    browserName: safari
+    deviceOrientation: portrait
+parallelsPerPlatform: 1
+browserstackLocal: false
+buildName: bstack-demo
+buildIdentifier: ${BUILD_NUMBER}
+projectName: Python test
+testObservability: true
+networkLogs: false
+consoleLogs: info
+framework: pytest
