@@ -355,7 +355,7 @@ class Tests(unittest.TestCase):
         time.sleep(1)
         Select(self.driver.find_element(By.CSS_SELECTOR, '[data-test="sort"]')).select_by_visible_text("Name (A - Z)")
 
-        time.sleep(1)
+        time.sleep(2)
 
         names = [el.text.strip() for el in self.driver.find_elements(By.CSS_SELECTOR, ".card-title")]
         self.assertEqual(names, sorted(names))
@@ -364,15 +364,16 @@ class Tests(unittest.TestCase):
         time.sleep(1)
         Select(self.driver.find_element(By.CSS_SELECTOR, '[data-test="sort"]')).select_by_visible_text("Name (Z - A)")
         
-        time.sleep(1)
+        time.sleep(2)
 
         names = [el.text.strip() for el in self.driver.find_elements(By.CSS_SELECTOR, ".card-title")]
         self.assertEqual(names, sorted(names, reverse=True))
     
     def test_sort_by_price_low_to_high(self):
+        time.sleep(1)
         Select(self.driver.find_element(By.CSS_SELECTOR, '[data-test="sort"]')).select_by_visible_text("Price (Low - High)")
 
-        time.sleep(1)
+        time.sleep(2)
 
         prices = [
             float(el.text.replace("$", "").strip())
@@ -381,9 +382,10 @@ class Tests(unittest.TestCase):
         self.assertEqual(prices, sorted(prices))
     
     def test_sort_by_price_high_to_low(self):
+        time.sleep(1)
         Select(self.driver.find_element(By.CSS_SELECTOR, '[data-test="sort"]')).select_by_visible_text("Price (High - Low)")
 
-        time.sleep(1)
+        time.sleep(2)
         
         prices = [
             float(el.text.replace("$", "").strip())
