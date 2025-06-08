@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Task",
+    name: "App",
     platforms: [
        .macOS(.v13)
     ],
@@ -21,7 +21,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "Task",
+            name: "App",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
@@ -34,9 +34,9 @@ let package = Package(
             swiftSettings: swiftSettings
         ),
         .testTarget(
-            name: "TaskTests",
+            name: "AppTests",
             dependencies: [
-                .target(name: "Task"),
+                .target(name: "App"),
                 .product(name: "VaporTesting", package: "vapor"),
             ],
             swiftSettings: swiftSettings
