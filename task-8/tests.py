@@ -352,6 +352,7 @@ class Tests(unittest.TestCase):
         self.assertIn("$14.15", product_price.text)
     
     def test_sort_by_name_az(self):
+        time.sleep(1)
         Select(self.driver.find_element(By.CSS_SELECTOR, '[data-test="sort"]')).select_by_visible_text("Name (A - Z)")
 
         time.sleep(1)
@@ -360,6 +361,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(names, sorted(names))
         
     def test_sort_by_name_za(self):
+        time.sleep(1)
         Select(self.driver.find_element(By.CSS_SELECTOR, '[data-test="sort"]')).select_by_visible_text("Name (Z - A)")
         
         time.sleep(1)
