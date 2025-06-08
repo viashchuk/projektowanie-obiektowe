@@ -7,7 +7,16 @@ import Redis
 
 public func configure(_ app: Application) async throws {
     app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
-    app.redis.configuration = try RedisConfiguration(hostname: "localhost")
+        
+    if let redisURL = Environment.get("REDIS_URL") {
+        var config = TLSConfiguration.makeClientConfiguration()
+        config.certificateVerification = .none
+
+        app.redis.configuration = try RedisConfiguration(url: redisURL, tlsConfiguration: config)
+    } else {
+        app.redis.configuration = try RedisConfiguration(hostname: "localhost")
+    }
+
 
     app.migrations.add(CreateProduct())
     app.migrations.add(CreateCategory())
