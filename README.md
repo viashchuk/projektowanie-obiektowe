@@ -127,8 +127,24 @@ Kod: [Vapor (Swift)](./task-7)
 :white_check_mark: 4.0 wymaganie 3 [Link do commita 3.1](https://github.com/viashchuk/projektowanie-obiektowe/commit/98bd7116d101222a7085b83cc8ff4732d1fe8f0b), [Link do commita 3.2](https://github.com/viashchuk/projektowanie-obiektowe/commit/0fe7d0b018e9f829dc732d91f0e831df093147ed)
 
 :white_check_mark: 4.5 wymaganie 4 [Link do commita 4](https://github.com/viashchuk/projektowanie-obiektowe/commit/65653db982fd0b2705c1a44e9d75ebd37a915354)
-<!-- 
-:white_check_mark: 5.0 wymaganie 5 [Link do commita 5]() -->
+
+:white_check_mark: 5.0 wymaganie 5 [Link do commita 5](https://github.com/viashchuk/projektowanie-obiektowe/commit/cf2cb4b32d4d8dff230aa4a7a32504ecee823952)
 
 
-Kod: [Vapor (Swift)](./task-7)
+Kod: [Test](./task-8)
+
+
+**Zadanie 9** Mobile first (Android)
+
+:white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/c66e17bf285392281a130b68919aeb1faf02897e)
+
+<!-- :white_check_mark: 3.5 wymaganie 2 [Link do commita 2]() -->
+
+<!-- :white_check_mark: 4.0 wymaganie 3 [Link do commita 3]() -->
+
+<!-- :white_check_mark: 4.5 wymaganie 4 [Link do commita 4]() -->
+
+<!-- :white_check_mark: 5.0 wymaganie 5 [Link do commita 5]() -->
+
+
+Kod: [Mobile first (Android)](./task-9)
