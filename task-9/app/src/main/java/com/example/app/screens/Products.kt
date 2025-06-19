@@ -53,9 +53,7 @@ fun ProductRow(product: Product) {
             .fillMaxWidth()
             .padding(8.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFd1d5dc)
-        ),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFd1d5dc)),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {

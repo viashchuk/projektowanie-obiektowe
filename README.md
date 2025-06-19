@@ -138,7 +138,7 @@ Kod: [Test](./task-8)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/c66e17bf285392281a130b68919aeb1faf02897e)
 
-<!-- :white_check_mark: 3.5 wymaganie 2 [Link do commita 2]() -->
+:white_check_mark: 3.5 wymaganie 2 [Link do commita 2](https://github.com/viashchuk/projektowanie-obiektowe/commit/6eb9d9ffa3220e7b98aeecb2bdf978e5cf9f6d5b)
 
 <!-- :white_check_mark: 4.0 wymaganie 3 [Link do commita 3]() -->
 
