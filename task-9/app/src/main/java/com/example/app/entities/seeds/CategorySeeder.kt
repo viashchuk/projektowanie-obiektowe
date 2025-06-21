@@ -2,24 +2,24 @@ package com.example.app.entities.seeds
 
 import io.realm.kotlin.Realm
 import java.util.UUID
-import com.example.app.entities.CategoryRealm
+import com.example.app.entities.Category
 
 object CategorySeeder {
     fun seed(realm: Realm) {
         val categories = listOf(
-            CategoryRealm().apply {
+            Category().apply {
                 id = UUID.randomUUID().toString()
                 title = "Laptopy"
             },
-            CategoryRealm().apply {
+            Category().apply {
                 id = UUID.randomUUID().toString()
                 title = "MacBooki"
             },
-            CategoryRealm().apply {
+            Category().apply {
                 id = UUID.randomUUID().toString()
                 title = "Tablety"
             },
-            CategoryRealm().apply {
+            Category().apply {
                 id = UUID.randomUUID().toString()
                 title = "Komputery Gamingowe"
             }

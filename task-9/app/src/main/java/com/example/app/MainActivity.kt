@@ -26,13 +26,22 @@ import com.example.app.screens.ProductsScreen
 import com.example.app.screens.CategoriesScreen
 import com.example.app.screens.CartScreen
 
-import com.example.app.entities.ProductRealm
-import com.example.app.entities.CategoryRealm
+import com.example.app.entities.Product
+import com.example.app.entities.Category
+import com.example.app.entities.OrderItem
+import com.example.app.entities.Order
 import com.example.app.entities.seeds.SeedRunner
+import com.example.app.screens.OrderConfirmation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val config = RealmConfiguration.create(schema = setOf(ProductRealm::class, CategoryRealm::class))
+        val config = RealmConfiguration.create(
+            schema = setOf(
+                Product::class,
+                Category::class,
+                Order::class,
+                OrderItem::class
+            ))
         val realm: Realm = Realm.open(config)
 
         realm.writeBlocking {
@@ -56,7 +65,11 @@ fun Main(realm: Realm) {
         NavHost(navController, startDestination = NavRoutes.Products.route) {
             composable(NavRoutes.Products.route) { ProductsScreen(realm) }
             composable(NavRoutes.Categories.route) { CategoriesScreen(realm)  }
-            composable(NavRoutes.Cart.route) { CartScreen(realm) }
+            composable(NavRoutes.Cart.route) { CartScreen(realm, navController) }
+            composable("order_confirmation/{orderId}") { backStackEntry ->
+                val orderId = backStackEntry.arguments?.getString("orderId") ?: ""
+                OrderConfirmation(navController, realm, orderId)
+            }
         }
     }
 }
@@ -83,4 +96,5 @@ sealed class NavRoutes(val route: String) {
     object Products : NavRoutes("products")
     object Categories : NavRoutes("categories")
     object Cart : NavRoutes("cart")
+    object OrderConfirmation : NavRoutes("order-confirmation")
 }

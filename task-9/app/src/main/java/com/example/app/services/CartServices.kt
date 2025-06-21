@@ -2,11 +2,11 @@ package com.example.app.services
 
 import java.util.UUID
 
-import com.example.app.entities.ProductRealm
+import com.example.app.entities.Product
 import com.example.app.entities.CartItemStorage
 import com.example.app.entities.CartItem
 
-fun addToCart(product: ProductRealm) {
+fun addToCart(product: Product) {
     val existingItem = CartItemStorage.find { it.product.id == product.id }
 
     if (existingItem != null) {

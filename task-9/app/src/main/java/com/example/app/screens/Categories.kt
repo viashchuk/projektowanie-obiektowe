@@ -10,12 +10,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.padding
 import io.realm.kotlin.Realm
 
-import com.example.app.entities.CategoryRealm
+import com.example.app.entities.Category
 
 
 @Composable
 fun CategoriesScreen(realm: Realm) {
-    val categories = realm.query(clazz = CategoryRealm::class).find()
+    val categories = realm.query(clazz = Category::class).find()
 
     Row(modifier = Modifier.padding(8.dp)) {
         CategoryList(
@@ -26,7 +26,7 @@ fun CategoriesScreen(realm: Realm) {
 }
 
 @Composable
-fun CategoryList(categories: List<CategoryRealm>, modifier: Modifier = Modifier) {
+fun CategoryList(categories: List<Category>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         item {
             Text("Categories")

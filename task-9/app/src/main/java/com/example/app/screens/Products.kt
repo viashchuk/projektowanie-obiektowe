@@ -22,15 +22,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.shape.RoundedCornerShape
 
 import io.realm.kotlin.Realm
-import io.realm.kotlin.query.RealmResults
-import io.realm.kotlin.query.find
 
-import com.example.app.entities.ProductRealm
+import com.example.app.entities.Product
 import com.example.app.services.addToCart
 
 @Composable
 fun ProductsScreen(realm: Realm) {
-    val products = realm.query(clazz = ProductRealm::class).find()
+    val products = realm.query(clazz = Product::class).find()
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Row(modifier = Modifier.padding(innerPadding)) {
@@ -40,7 +38,7 @@ fun ProductsScreen(realm: Realm) {
 }
 
 @Composable
-fun ProductsList(products: List<ProductRealm>, modifier: Modifier = Modifier) {
+fun ProductsList(products: List<Product>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         item {
             Text("Products")
@@ -52,7 +50,7 @@ fun ProductsList(products: List<ProductRealm>, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ProductRow(product: ProductRealm) {
+fun ProductRow(product: Product) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
