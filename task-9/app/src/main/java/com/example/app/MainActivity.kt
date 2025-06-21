@@ -19,31 +19,44 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+
 import com.example.app.screens.ProductsScreen
 import com.example.app.screens.CategoriesScreen
 import com.example.app.screens.CartScreen
-import com.example.app.entities.seeds.SeedRunner
 
+import com.example.app.entities.ProductRealm
+import com.example.app.entities.CategoryRealm
+import com.example.app.entities.seeds.SeedRunner
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        SeedRunner.run()
+        val config = RealmConfiguration.create(schema = setOf(ProductRealm::class, CategoryRealm::class))
+        val realm: Realm = Realm.open(config)
+
+        realm.writeBlocking {
+            deleteAll()
+        }
+
+        SeedRunner.run(realm)
+
         super.onCreate(savedInstanceState)
         setContent {
-            Main()
+            Main(realm)
         }
     }
 }
 
 @Composable
-fun Main() {
+fun Main(realm: Realm) {
     val navController = rememberNavController()
     Column(Modifier.padding(8.dp)) {
         NavBar(navController = navController)
         NavHost(navController, startDestination = NavRoutes.Products.route) {
-            composable(NavRoutes.Products.route) { ProductsScreen() }
-            composable(NavRoutes.Categories.route) { CategoriesScreen()  }
-            composable(NavRoutes.Cart.route) { CartScreen() }
+            composable(NavRoutes.Products.route) { ProductsScreen(realm) }
+            composable(NavRoutes.Categories.route) { CategoriesScreen(realm)  }
+            composable(NavRoutes.Cart.route) { CartScreen(realm) }
         }
     }
 }

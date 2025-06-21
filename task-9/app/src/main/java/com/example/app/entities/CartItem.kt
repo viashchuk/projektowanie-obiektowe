@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 data class CartItem (
     val id: String,
     val amount: Int,
-    val product: Product
+    val product: ProductRealm
 )
 val CartItemStorage = mutableListOf<CartItem>()

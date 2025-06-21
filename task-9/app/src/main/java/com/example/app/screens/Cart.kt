@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 import com.example.app.entities.CartItemStorage
+import io.realm.kotlin.Realm
 
 @Composable
-fun CartScreen() {
+fun CartScreen(realm: Realm) {
     Column(modifier = Modifier.padding(16.dp)) {
         if (CartItemStorage.isEmpty()) {
             Text("Cart is empty")

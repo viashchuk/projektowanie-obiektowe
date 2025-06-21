@@ -1,28 +1,75 @@
 package com.example.app.entities.seeds
 
 import java.util.UUID
-
-import com.example.app.entities.Product
-import com.example.app.entities.productStorage
-import com.example.app.entities.Category
+import io.realm.kotlin.Realm
+import com.example.app.entities.ProductRealm
+import com.example.app.entities.CategoryRealm
 
 object ProductSeeder {
-    fun seed(categoryById: Map<String, Category>) {
-        productStorage.addAll(
-            listOf(
-                Product(UUID.randomUUID().toString(), "LENOVO IdeaPad Slim 3 15IRH10 15.3", 2699.00, 10, categoryById["laptopy"]!!),
-                Product(UUID.randomUUID().toString(), "HP ProBook 450 G10 15.6", 2799.00, 1, categoryById["laptopy"]!!),
-                Product(UUID.randomUUID().toString(),"ASUS Vivobook A1504VA-BQ940W 15.6", 2999.00, 2, categoryById["laptopy"]!!),
+    fun seed(realm: Realm) {
+        realm.writeBlocking {
+            val laptopsCategory =
+                query(CategoryRealm::class, "title == $0", "Laptopy").first().find()
+            val macbooksCategory =
+                query(CategoryRealm::class, "title == $0", "MacBooki").first().find()
+            val tabletsCategory =
+                query(CategoryRealm::class, "title == $0", "Tablety").first().find()
 
-                Product(UUID.randomUUID().toString(),"APPLE MacBook Air 13.3", 3299.00, 1, categoryById["mac_booki"]!!),
-                Product(UUID.randomUUID().toString(),"APPLE MacBook Pro 2024 14", 9148.00, 2, categoryById["mac_booki"]!!),
-
-                Product(UUID.randomUUID().toString(),"Tablet SAMSUNG Galaxy Tab S10 FE 10.9", 2399.00, 2, categoryById["tablety"]!!),
-                Product(UUID.randomUUID().toString(),"Tablet APPLE iPad Air 11", 2999.00, 2, categoryById["tablety"]!!),
-
-                Product(UUID.randomUUID().toString(),"MAD DOG ENDORFY300ARGB-A07WR16 R5-5600 16GB", 4249.00, 2, categoryById["komputery_gamingowe"]!!),
-                Product(UUID.randomUUID().toString(),"MAD DOG GeForce RTX4060 PurePC Edition 2", 4199.00, 2, categoryById["komputery_gamingowe"]!!)
+            val products = listOf(
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "LENOVO IdeaPad Slim 3 15IRH10 15.3"
+                    price = 2699.00
+                    amount = 10
+                    category = laptopsCategory
+                },
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "HP ProBook 450 G10 15.6"
+                    price = 2799.00
+                    amount = 1
+                    category = laptopsCategory
+                },
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "ASUS Vivobook A1504VA-BQ940W 15.6"
+                    price = 2999.00
+                    amount = 2
+                    category = laptopsCategory
+                },
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "APPLE MacBook Air 13.3"
+                    price = 3299.00
+                    amount = 1
+                    category = macbooksCategory
+                },
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "APPLE MacBook Pro 2024 14"
+                    price = 9148.00
+                    amount = 2
+                    category = macbooksCategory
+                },
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "Tablet SAMSUNG Galaxy Tab S10 FE 10.9"
+                    price = 2399.00
+                    amount = 2
+                    category = tabletsCategory
+                },
+                ProductRealm().apply {
+                    id = UUID.randomUUID().toString()
+                    title = "Tablet APPLE iPad Air 11"
+                    price = 2999.00
+                    amount = 2
+                    category = tabletsCategory
+                }
             )
-        )
+
+            products.forEach { product ->
+                copyToRealm(product)
+            }
+        }
     }
 }

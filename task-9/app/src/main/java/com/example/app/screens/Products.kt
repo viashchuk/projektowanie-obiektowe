@@ -21,21 +21,26 @@ import androidx.compose.material3.Button
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.shape.RoundedCornerShape
 
-import com.example.app.entities.Product
-import com.example.app.entities.productStorage
+import io.realm.kotlin.Realm
+import io.realm.kotlin.query.RealmResults
+import io.realm.kotlin.query.find
+
+import com.example.app.entities.ProductRealm
 import com.example.app.services.addToCart
 
 @Composable
-fun ProductsScreen() {
+fun ProductsScreen(realm: Realm) {
+    val products = realm.query(clazz = ProductRealm::class).find()
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Row(modifier = Modifier.padding(innerPadding)) {
-            ProductsList(productStorage)
+            ProductsList(products)
         }
     }
 }
 
 @Composable
-fun ProductsList(products: List<Product>, modifier: Modifier = Modifier) {
+fun ProductsList(products: List<ProductRealm>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         item {
             Text("Products")
@@ -47,7 +52,7 @@ fun ProductsList(products: List<Product>, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ProductRow(product: Product) {
+fun ProductRow(product: ProductRealm) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,7 +65,7 @@ fun ProductRow(product: Product) {
             Text(text = "Title: ${product.title}")
             Text(text = "Price: ${product.price} zł")
             Text(text = "Amount: ${product.amount}")
-            Text(text = "Category: ${product.category.title}")
+            Text(text = "Category: ${product.category?.title ?: "Any"}")
 
             Spacer(modifier = Modifier.padding(top = 8.dp))
 

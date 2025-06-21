@@ -1,14 +1,13 @@
 package com.example.app.entities
 
-import kotlinx.serialization.Serializable
+import io.realm.kotlin.types.annotations.PrimaryKey
+import io.realm.kotlin.types.RealmObject
 
-@Serializable
-data class Product (
-    val id: String,
-    val title: String,
-    val price: Double,
-    val amount: Int,
-    val category: Category
-)
-
-val productStorage = mutableListOf<Product>()
+class ProductRealm : RealmObject {
+    @PrimaryKey
+    var id: String = ""
+    var title: String = ""
+    var price: Double = 0.0
+    var amount: Int = 0
+    var category: CategoryRealm? = null
+}

@@ -1,18 +1,34 @@
 package com.example.app.entities.seeds
 
-import com.example.app.entities.Category
-import com.example.app.entities.categoryStorage
+import io.realm.kotlin.Realm
+import java.util.UUID
+import com.example.app.entities.CategoryRealm
 
 object CategorySeeder {
-    fun seed(): Map<String, Category> {
+    fun seed(realm: Realm) {
         val categories = listOf(
-            Category("laptopy", "Laptopy"),
-            Category("mac_booki", "MacBooki"),
-            Category("tablety", "Tablety"),
-            Category("komputery_gamingowe", "Komputery gamingowe")
+            CategoryRealm().apply {
+                id = UUID.randomUUID().toString()
+                title = "Laptopy"
+            },
+            CategoryRealm().apply {
+                id = UUID.randomUUID().toString()
+                title = "MacBooki"
+            },
+            CategoryRealm().apply {
+                id = UUID.randomUUID().toString()
+                title = "Tablety"
+            },
+            CategoryRealm().apply {
+                id = UUID.randomUUID().toString()
+                title = "Komputery Gamingowe"
+            }
         )
-        categoryStorage.addAll(categories)
 
-        return categories.associateBy { it.id }
+        realm.writeBlocking {
+            categories.forEach { category ->
+                copyToRealm(category)
+            }
+        }
     }
 }
