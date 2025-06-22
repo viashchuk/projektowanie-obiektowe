@@ -1,0 +1,7 @@
+<h1>Edit Post</h1>
+<form action="/posts/#(post.id)/update" method="POST">
+    <label>Name: <input type="text" name="title" value="#(post.title)" /></label><br>
+    <label for="body">Content:</label>
+    <textarea id="body" name="body">#(post.body)</textarea><br><br>
+    <button type="submit">Save</button>
+</form>

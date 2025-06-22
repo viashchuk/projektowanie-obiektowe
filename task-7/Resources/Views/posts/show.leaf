@@ -1,0 +1,12 @@
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <h1>Post</h1>
+</div>
+
+<dl style="display: flex">
+  <dt style="font-weight: 600;">Title</dt>
+  <dd>#(post.title)</dd>
+</dl>
+<dl style="display: flex">
+  <dt style="font-weight: 600;">Content</dt>
+  <dd>#(post.body)</dd>
+</dl>
