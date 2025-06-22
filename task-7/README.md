@@ -5,6 +5,8 @@
 
 https://github.com/user-attachments/assets/df9b12ae-eca2-4e42-9540-1cc9090d1e39
 
+[Heroku app](https://projekowanie-obiektowe-efaf74c00e4b.herokuapp.com/)
+
 ## Tasks
 
 - 3.0 A controller should be created along with Product models compliant with CRUD in ORM Fluent: [Commit](https://github.com/viashchuk/projektowanie-obiektowe/commit/4b37ac39c44ecae1c79784d25f22fa5ae7829136)

@@ -100,7 +100,6 @@ Kod: [React](./task-5)
 Kod: [Sonar (JS)](./task-6)
 
 
-
 **Zadanie 7** Vapor (Swift)
 
 :white_check_mark: 3.0 wymaganie 1 [Link do commita 1](https://github.com/viashchuk/projektowanie-obiektowe/commit/4b37ac39c44ecae1c79784d25f22fa5ae7829136)
@@ -116,6 +115,7 @@ Kod: [Sonar (JS)](./task-6)
 
 Kod: [Vapor (Swift)](./task-7)
 
+[Heroku App Link](https://projekowanie-obiektowe-efaf74c00e4b.herokuapp.com/)
 
 
 **Zadanie 8** Tests
