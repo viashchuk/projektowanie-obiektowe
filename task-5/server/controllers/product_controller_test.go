@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 	"net/http/httptest"
+	"server/controllers"
 	"server/repositories"
 	"testing"
 
@@ -10,14 +11,18 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetProductsSuccess(t *testing.T) {
+func setupEcho() *echo.Echo {
+	return echo.New()
+}
+
+func TestGetProducts_Success(t *testing.T) {
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/products", nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	MockRepository := &repositories.MockRepository{}
-	ctrl := NewController(MockRepository)
+	ctrl := controllers.NewController(MockRepository)
 
 	err := ctrl.GetProducts(ctx)
 
@@ -26,14 +31,14 @@ func TestGetProductsSuccess(t *testing.T) {
 	assert.Contains(t, rec.Body.String(), "Kawa")
 }
 
-func TestGetProductsEmptyList(t *testing.T) {
+func TestGetProducts_EmptyList(t *testing.T) {
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodGet, "/products", nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepositoryWithEmptyLists{}
-	ctrl := NewController(mockRepository)
+	ctrl := controllers.NewController(mockRepository)
 
 	err := ctrl.GetProducts(ctx)
 

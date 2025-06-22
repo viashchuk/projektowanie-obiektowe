@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"server/controllers"
 	"server/models"
 	"server/repositories"
 	"testing"
@@ -12,16 +13,19 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
-const ordersPath = "/orders"
 
-func TestGetOrdersSuccess(t *testing.T) {
-	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, ordersPath, nil)
+func setupEcho() *echo.Echo {
+	return echo.New()
+}
+
+func TestGetOrders_Success(t *testing.T) {
+	e := setupEcho()
+	req := httptest.NewRequest(http.MethodGet, "/orders", nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := NewController(mockRepository)
+	ctrl := controllers.NewController(mockRepository)
 
 	err := ctrl.GetOrders(ctx)
 
@@ -29,14 +33,14 @@ func TestGetOrdersSuccess(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
-func TestGetOrdersEmptyList(t *testing.T) {
+func TestGetOrders_EmptyList(t *testing.T) {
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, ordersPath, nil)
+	req := httptest.NewRequest(http.MethodGet, "/orders", nil)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepositoryWithEmptyLists{}
-	ctrl := NewController(mockRepository)
+	ctrl := controllers.NewController(mockRepository)
 
 	err := ctrl.GetOrders(ctx)
 
@@ -44,8 +48,8 @@ func TestGetOrdersEmptyList(t *testing.T) {
 	assert.Equal(t, http.StatusNoContent, rec.Code)
 }
 
-func TestCreateOrderSuccess(t *testing.T) {
-	e := echo.New()
+func TestCreateOrder_Success(t *testing.T) {
+	e := setupEcho()
 
 	order := models.Order{
 		CustomerFirstName: "Anna",
@@ -61,13 +65,13 @@ func TestCreateOrderSuccess(t *testing.T) {
 	}
 
 	body, _ := json.Marshal(order)
-	req := httptest.NewRequest(http.MethodPost, ordersPath, bytes.NewReader(body))
+	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewReader(body))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := NewController(mockRepository)
+	ctrl := controllers.NewController(mockRepository)
 
 	err := ctrl.CreateOrder(ctx)
 
@@ -75,16 +79,16 @@ func TestCreateOrderSuccess(t *testing.T) {
 	assert.Equal(t, http.StatusCreated, rec.Code)
 }
 
-func TestCreateOrderInvalidData(t *testing.T) {
-	e := echo.New()
+func TestCreateOrder_InvalidData(t *testing.T) {
+	e := setupEcho()
 
-	req := httptest.NewRequest(http.MethodPost, ordersPath, bytes.NewBufferString("invalid-json"))
+	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewBufferString("invalid-json"))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := NewController(mockRepository)
+	ctrl := controllers.NewController(mockRepository)
 
 	err := ctrl.CreateOrder(ctx)
 
@@ -92,8 +96,8 @@ func TestCreateOrderInvalidData(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, rec.Code)
 }
 
-func TestCreateOrderEmptyItems(t *testing.T) {
-	e := echo.New()
+func TestCreateOrder_EmptyItems(t *testing.T) {
+	e := setupEcho()
 
 	body := `{
 		"firstName": "Anna",
@@ -106,13 +110,13 @@ func TestCreateOrderEmptyItems(t *testing.T) {
 		"items": []
 	}`
 
-	req := httptest.NewRequest(http.MethodPost, ordersPath, bytes.NewBufferString(body))
+	req := httptest.NewRequest(http.MethodPost, "/orders", bytes.NewBufferString(body))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	ctx := e.NewContext(req, rec)
 
 	mockRepository := &repositories.MockRepository{}
-	ctrl := NewController(mockRepository)
+	ctrl := controllers.NewController(mockRepository)
 
 	err := ctrl.CreateOrder(ctx)
 
