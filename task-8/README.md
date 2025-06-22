@@ -8,3 +8,5 @@
 - 5.0 Run functional tests on Browserstack on a mobile device: [Commit](https://github.com/viashchuk/projektowanie-obiektowe/commit/cf2cb4b32d4d8dff230aa4a7a32504ecee823952)
 
 ## Demo
+
+https://github.com/user-attachments/assets/e9a7d1ef-4230-4ac8-862c-b611402077bd
